@@ -96,10 +96,9 @@ system_dlkm /system_dlkm erofs ro wait,slotselect,avb,logical,first_stage_mount
 /dev/block/by-name/nvdata /nvdata ext4 noatime,nosuid,nodev,noauto_da_alloc,commit=1,nodelalloc wait,check,formattable
 /dev/block/by-name/nvcfg /nvcfg ext4 noatime,nosuid,nodev,noauto_da_alloc,commit=1,nodelalloc wait,check,formattable
 
-/dev/block/by-name/factory /factory ext4 ro,noatime,nodev,discard defaults
 
 
-/dev/block/by-name/persist /persist ext4 noatime,nosuid,nodev,noauto_da_alloc,commit=1,nodelalloc wait,check,formattable
+/dev/block/by-name/persist /mnt/vendor/persist ext4 noatime,nosuid,nodev,noauto_da_alloc,commit=1,nodelalloc wait,check,formattable
 
 
 
