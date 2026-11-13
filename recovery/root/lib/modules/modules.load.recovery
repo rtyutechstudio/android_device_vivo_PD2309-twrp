@@ -275,7 +275,6 @@ sec.ko
 uload_ind.ko
 load_track.ko
 btmtk_uart_unify.ko
-vr.ko
 vivo_haptic_core.ko
 aw86927.ko
 aw86938.ko
