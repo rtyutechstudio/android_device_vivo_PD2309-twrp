@@ -137,6 +137,7 @@ BOARD_MAIN_LIST := \
 # Workaround for error copying vendor and product files to recovery ramdisk
 TARGET_COPY_OUT_VENDOR := vendor
 TARGET_COPY_OUT_PRODUCT := product
+TARGET_COPY_OUT_VENDOR_DLKM := vendor_dlkm
 TARGET_COPY_OUT_ODM := odm
 
 # Metadata
