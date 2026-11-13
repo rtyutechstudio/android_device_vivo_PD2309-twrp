@@ -1,0 +1,212 @@
+# Copyright (C) 2026 The TWRP Open Source Project
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+DEVICE_PATH := device/vivo/PD2309
+
+# For building with minimal manifest
+ALLOW_MISSING_DEPENDENCIES := true
+BUILD_BROKEN_DUP_RULES := true
+BUILD_BROKEN_ELF_PREBUILT_PRODUCT_COPY_FILES := true
+
+# A/B
+AB_OTA_UPDATER := true
+AB_OTA_PARTITIONS += \
+    system \
+    vendor \
+    product \
+    odm \
+    odm_dlkm \
+    system_dlkm \
+    vendor_dlkm \
+    boot \
+    vbmeta_vendor \
+    lk \
+    vendor_boot
+
+BOARD_MOVE_RECOVERY_RESOURSES_TO_VENDOR_BOOT := true
+BOARD_USES_VENDOR_BOOT := true
+BOARD_INCLUDE_RECOVERY_RAMDISK_IN_VENDOR_BOOT := true
+TARGET_NO_RECOVERY := true
+
+# Architecture
+TARGET_ARCH := arm64
+TARGET_ARCH_VARIANT := armv8-2a
+TARGET_CPU_ABI := arm64-v8a
+TARGET_CPU_ABI2 := 
+TARGET_CPU_VARIANT := generic
+TARGET_CPU_VARIANT_RUNTIME := cortex-a55
+
+TARGET_2ND_ARCH := arm
+TARGET_2ND_ARCH_VARIANT := armv8-2a
+TARGET_2ND_CPU_ABI := armeabi-v7a
+TARGET_2ND_CPU_ABI2 := armeabi
+TARGET_2ND_CPU_VARIANT := generic
+TARGET_2ND_CPU_VARIANT_RUNTIME := cortex-a55
+
+# Bootloader
+TARGET_BOOTLOADER_BOARD_NAME := k6989v1_64
+TARGET_NO_BOOTLOADER := true
+TARGET_USES_UEFI := true
+
+# Display
+TARGET_SCREEN_DENSITY := 560
+TARGET_SCREEN_WIDTH := 1260
+TARGET_SCREEN_HEIGHT := 2800
+
+# Platform
+BOARD_USES_MTK_HARDWARE := true
+TARGET_BOARD_PLATFORM := mt6989
+PLATFORM_SECURITY_PATCH := 2099-12-31
+PLATFORM_VERSION := 99.87.36
+PLATFORM_VERSION_LAST_STABLE := $(PLATFORM_VERSION)
+
+
+# Vendor Security Path
+VENDOR_SECURITY_PATCH := $(PLATFORM_SECURITY_PATCH)
+
+# Kernel
+BOARD_BOOTIMG_HEADER_VERSION := 4
+BOARD_KERNEL_BASE := 0x3fff8000
+BOARD_KERNEL_OFFSET := 0x00008000
+BOARD_RAMDISK_OFFSET := 0x26f08000
+BOARD_KERNEL_PAGESIZE := 4096
+BOARD_KERNEL_TAGS_OFFSET := 0x07c88000
+BOARD_DTB_OFFSET := 0x07c88000
+BOARD_KERNEL_CMDLINE := bootopt=64S3,32N2,64N2
+BOARD_KERNEL_CMDLINE += erofs.reserved_pages=256
+BOARD_KERNEL_CMDLINE += product.version=PD2309_A_16.2.15.0.W10-Cuoxianxu
+BOARD_KERNEL_CMDLINE += fingerprint.abbr=14/UP1A.231005.007
+BOARD_KERNEL_CMDLINE += region_ver=W10
+BOARD_KERNEL_CMDLINE += product.solution=MTK
+BOARD_KERNEL_CMDLINE += androidboot.selinux=permissive
+BOARD_MKBOOTIMG_ARGS += --header_version $(BOARD_BOOTIMG_HEADER_VERSION)
+BOARD_MKBOOTIMG_ARGS += --ramdisk_offset $(BOARD_RAMDISK_OFFSET)
+BOARD_MKBOOTIMG_ARGS += --tags_offset $(BOARD_KERNEL_TAGS_OFFSET)
+BOARD_MKBOOTIMG_ARGS += --dtb_offset $(BOARD_DTB_OFFSET)
+BOARD_RAMDISK_USE_LZ4 := true
+BOARD_KERNEL_IMAGE_NAME := Image
+
+
+# Kernel - prebuilt
+TARGET_FORCE_PREBUILT_KERNEL := true
+TARGET_PREBUILT_DTB := $(DEVICE_PATH)/prebuilt/dtb.img
+TARGET_PREBUILT_KERNEL := $(DEVICE_PATH)/prebuilt/Image
+BOARD_MKBOOTIMG_ARGS += --dtb $(TARGET_PREBUILT_DTB)
+BOARD_KERNEL_SEPARATED_DTBO := true
+BOARD_INCLUDE_DTB_IN_BOOTIMG := 
+
+# Filesystem
+BOARD_HAS_LARGE_FILESYSTEM := true
+TARGET_USERIMAGES_USE_EXT4 := true
+TARGET_USERIMAGES_USE_EROFS := true
+TARGET_USERIMAGES_USE_F2FS := true
+BOARD_SYSTEMIMAGE_FILE_SYSTEM_TYPE := erofs
+BOARD_VENDORIMAGE_FILE_SYSTEM_TYPE := erofs
+BOARD_PRODUCTIMAGE_FILE_SYSTEM_TYPE := erofs
+BOARD_ODMIMAGE_FILE_SYSTEM_TYPE := erofs
+BOARD_VENDOR_DLKMIMAGE_FILE_SYSTEM_TYPE := erofs
+BOARD_USERDATAIMAGE_FILE_SYSTEM_TYPE := f2fs
+
+# Partitions
+BOARD_FLASH_BLOCK_SIZE := 262144 #(kernel_pagesize * 64)
+BOARD_BOOTIMAGE_PARTITION_SIZE := 100663296
+#BOARD_RECOVERYIMAGE_PARTITION_SIZE := 100993296
+
+# Dynamic Partition
+BOARD_SUPER_PARTITION_SIZE := 13421772800
+BOARD_SUPER_PARTITION_GROUPS := main
+BOARD_MAIN_SIZE := 13419675648
+BOARD_MAIN_LIST := \
+        system \
+        vendor \
+        product \
+        odm
+
+# Workaround for error copying vendor and product files to recovery ramdisk
+TARGET_COPY_OUT_VENDOR := vendor
+TARGET_COPY_OUT_PRODUCT := product
+TARGET_COPY_OUT_ODM := odm
+
+# Metadata
+BOARD_USES_METADATA_PARTITION := true
+BOARD_ROOT_EXTRA_FOLDERS += metadata
+
+# System as root
+BOARD_SUPPRESS_SECURE_ERASE := true
+
+# AVB
+BOARD_AVB_ENABLE := true
+BOARD_AVB_MAKE_VBMETA_IMAGE_ARGS += --flags 0
+BOARD_AVB_VBMETA_SYSTEM := system
+BOARD_AVB_BOOT_KEY_PATH := external/avb/test/data/testkey_rsa2048.pem
+BOARD_AVB_BOOT_ALGORITHM := SHA256_RSA2048
+BOARD_AVB_BOOT_ROLLBACK_INDEX := 0
+BOARD_AVB_BOOT_ROLLBACK_INDEX_LOCATION := 0
+
+# TWRP specific build flags
+TW_THEME := portrait_hdpi
+TARGET_RECOVERY_PIXEL_FORMAT := RGBX_8888
+TW_EXTRA_LANGUAGES := true
+TW_DEFAULT_LANGUAGE := zh_CN
+TW_INPUT_BLACKLIST := "hbtp_vm"
+
+TW_USE_TOOLBOX := true
+TW_INCLUDE_REPACKTOOLS := true
+TW_INCLUDE_RESETPROP := true
+TW_INCLUDE_LIBRESETPROP := true
+
+TWRP_INCLUDE_LOGCAT := true
+TARGET_USES_LOGD := true
+TW_DEVICE_VERSION := vivo X100-OS6
+#TW_SCREEN_BLANK_ON_BOOT := true
+TW_EXCLUDE_DEFAULT_USB_INIT := true
+TW_HAS_MTP := true
+RECOVERY_SDCARD_ON_DATA := true
+TW_EXCLUDE_TWRPAPP := true
+TW_INCLUDE_FB2PNG := true
+TARGET_USES_MKE2FS := true
+TARGET_RECOVERY_FSTAB := $(DEVICE_PATH)/recovery/root/system/etc/recovery.fstab
+TARGET_SYSTEM_PROP += $(DEVICE_PATH)/system.prop
+TW_BRIGHTNESS_PATH := "/sys/class/leds/lcd-backlight/brightness"
+TW_MAX_BRIGHTNESS := 2047
+
+# FastbootD
+TW_INCLUDE_FASTBOOTD := true
+
+# Fuse
+TW_INCLUDE_NTFS_3G    := true
+TW_INCLUDE_FUSE_EXFAT := true
+TW_INCLUDE_FUSE_NTFS  := true
+
+
+# Props
+TARGET_SYSTEM_PROP := $(DEVICE_PATH)/system.prop
+
+# Crypto
+TW_INCLUDE_CRYPTO := false
+TW_INCLUDE_CRYPTO_FBE := false
+TW_INCLUDE_FBE_METADATA_DECRYPT := false
+TW_PREPARE_DATA_MEDIA_EARLY := false
+
+# StatusBar
+TW_STATUS_ICONS_ALIGN := center
+TW_CUSTOM_CLOCK_POS := 610
+
+
+# AIDL
+TW_SUPPORT_INPUT_AIDL_HAPTICS := true
+
+
+# Fix fastboot reboot
+TW_NO_FASTBOOT_BOOT := true

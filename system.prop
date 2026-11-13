@@ -1,0 +1,7 @@
+ro.mediatek.platform=MT6989
+ro.vendor.mediatek.platform=MT6989
+ro.hardware=mt6989
+ro.boot.dynamic_partitions=true
+ro.author=Cuoxianxu
+fbe.metadata.wrappedkey=true
+ro.postinstall.fstab.prefix=/system
