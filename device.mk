@@ -22,6 +22,8 @@ AB_OTA_UPDATER := true
 TARGET_IS_VAB := true
 ENABLE_VIRTUAL_AB := true
 $(call inherit-product, $(SRC_TARGET_DIR)/product/virtual_ab_ota.mk)
+PRODUCT_COPY_FILES += \
+    $(foreach d,first_stage_ramdisk lib,$(call find-copy-subdir-files,*,$(LOCAL_PATH)/recovery/root/$(d),vendor_ramdisk/$(d)))
 
 # Update Engine & Update Verifier 
 PRODUCT_PACKAGES += \
