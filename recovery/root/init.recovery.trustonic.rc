@@ -1,0 +1,15 @@
+service prepdecrypt /system/bin/prepdecrypt.sh
+     user root
+     group root
+     disabled
+     oneshot
+     seclabel u:r:recovery:s0
+
+on fs
+     chmod 0755  /system/bin/prepdecrypt.sh
+     start prepdecrypt
+
+on property:crypto.ready=1
+    start mobicore
+    start vendor.gatekeeper-default
+    start vendor.keymint-trustonic
