@@ -12,4 +12,5 @@ on early-init
 on post-fs
     start health-hal-2-1
     start vendor.vibrator-default
+    start vendor.boot-default
 

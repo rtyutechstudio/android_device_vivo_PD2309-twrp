@@ -6,44 +6,44 @@
 # 1 "<built-in>" 2
 # 1 "vendor/mediatek/proprietary/hardware/fstab/mt6989/fstab.in.mt6989" 2
 # 185 "vendor/mediatek/proprietary/hardware/fstab/mt6989/fstab.in.mt6989"
-system /system ext4 ro wait,slotselect,avb=vbmeta_system,logical,first_stage_mount,avb_keys=/avb/q-gsi.avbpubkey:/avb/r-gsi.avbpubkey:/avb/s-gsi.avbpubkey
+system /system ext4 ro wait,slotselect,logical,first_stage_mount
 
 
 
-system /system erofs ro wait,slotselect,avb=vbmeta_system,logical,first_stage_mount,avb_keys=/avb/q-gsi.avbpubkey:/avb/r-gsi.avbpubkey:/avb/s-gsi.avbpubkey
+system /system erofs ro wait,slotselect,logical,first_stage_mount
 
 
-system_ext /system_ext ext4 ro wait,slotselect,avb=vbmeta_system,logical,first_stage_mount,avb_keys=/avb/q-gsi.avbpubkey:/avb/r-gsi.avbpubkey:/avb/s-gsi.avbpubkey
-
-
-
-system_ext /system_ext erofs ro wait,slotselect,avb=vbmeta_system,logical,first_stage_mount,avb_keys=/avb/q-gsi.avbpubkey:/avb/r-gsi.avbpubkey:/avb/s-gsi.avbpubkey
+system_ext /system_ext ext4 ro wait,slotselect,logical,first_stage_mount
 
 
 
-vendor /vendor ext4 ro wait,slotselect,avb,logical,first_stage_mount
+system_ext /system_ext erofs ro wait,slotselect,logical,first_stage_mount
 
 
 
-vendor /vendor erofs ro wait,slotselect,avb,logical,first_stage_mount
+vendor /vendor ext4 ro wait,slotselect,logical,first_stage_mount
 
 
 
-
-product /product ext4 ro wait,slotselect,avb,logical,first_stage_mount
-
-
-
-product /product erofs ro wait,slotselect,avb,logical,first_stage_mount
+vendor /vendor erofs ro wait,slotselect,logical,first_stage_mount
 
 
 
 
-odm /odm ext4 ro wait,slotselect,avb,logical,first_stage_mount
+product /product ext4 ro wait,slotselect,logical,first_stage_mount
 
 
 
-odm /odm erofs ro wait,slotselect,avb,logical,first_stage_mount
+product /product erofs ro wait,slotselect,logical,first_stage_mount
+
+
+
+
+odm /odm ext4 ro wait,slotselect,logical,first_stage_mount
+
+
+
+odm /odm erofs ro wait,slotselect,logical,first_stage_mount
 # 234 "vendor/mediatek/proprietary/hardware/fstab/mt6989/fstab.in.mt6989"
 cust /oem erofs ro wait,slotselect,logical,vverify,logical,first_stage_mount
 vgc /vendor/vgc erofs ro wait,slotselect,logical,vverify,logical,first_stage_mount
@@ -54,29 +54,29 @@ vgc /vendor/vgc erofs ro wait,slotselect,logical,vverify,logical,first_stage_mou
 
 
 
-vendor_dlkm /vendor_dlkm ext4 ro wait,slotselect,avb,logical,first_stage_mount
+vendor_dlkm /vendor_dlkm ext4 ro wait,slotselect,logical,first_stage_mount
 
 
 
-vendor_dlkm /vendor_dlkm erofs ro wait,slotselect,avb,logical,first_stage_mount
-
-
-
-
-odm_dlkm /odm_dlkm ext4 ro wait,slotselect,avb,logical,first_stage_mount
-
-
-
-odm_dlkm /odm_dlkm erofs ro wait,slotselect,avb,logical,first_stage_mount
+vendor_dlkm /vendor_dlkm erofs ro wait,slotselect,logical,first_stage_mount
 
 
 
 
-system_dlkm /system_dlkm ext4 ro wait,slotselect,avb,logical,first_stage_mount
+odm_dlkm /odm_dlkm ext4 ro wait,slotselect,logical,first_stage_mount
 
 
 
-system_dlkm /system_dlkm erofs ro wait,slotselect,avb,logical,first_stage_mount
+odm_dlkm /odm_dlkm erofs ro wait,slotselect,logical,first_stage_mount
+
+
+
+
+system_dlkm /system_dlkm ext4 ro wait,slotselect,logical,first_stage_mount
+
+
+
+system_dlkm /system_dlkm erofs ro wait,slotselect,logical,first_stage_mount
 
 
 
@@ -130,7 +130,7 @@ system_dlkm /system_dlkm erofs ro wait,slotselect,avb,logical,first_stage_mount
 /dev/block/by-name/pvmfw /pvmfw emmc defaults first_stage_mount,nofail,slotselect
 # 326 "vendor/mediatek/proprietary/hardware/fstab/mt6989/fstab.in.mt6989"
 /dev/block/by-name/vbmeta_vendor /vbmeta_vendor emmc defaults first_stage_mount,nofail,slotselect
-/dev/block/by-name/vbmeta_system /vbmeta_system emmc defaults first_stage_mount,nofail,slotselect,avb=vbmeta
+/dev/block/by-name/vbmeta_system /vbmeta_system emmc defaults first_stage_mount,nofail,slotselect
 
 /dev/block/by-name/logo /logo emmc defaults defaults
 /dev/block/by-name/expdb /expdb emmc defaults defaults
